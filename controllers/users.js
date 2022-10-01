@@ -4,7 +4,9 @@ var bcrypt = require("bcrypt");
 //Get users
 exports.listUsers = async (req, res) => {
   try {
-    const user = await connectDB("SELECT id, name , username , role FROM user;");
+    const user = await connectDB(
+      "SELECT id, name , username , role FROM user;"
+    );
 
     res.status(200).json(user);
   } catch (err) {
@@ -82,7 +84,7 @@ exports.deleteUsers = async (req, res) => {
     });
   }
   try {
-    await connectDB(`DELETE FROM user WHERE id = ? `, [id]);
+    await connectDB(`DELETE FROM user WHERE id = ? `, [UserId]);
     res.status(200).json({
       status: "user has been delete",
     });

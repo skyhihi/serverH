@@ -97,24 +97,3 @@ exports.delYear = async (req, res) => {
     });
   }
 };
-
-exports.delYear_P = async (req, res) => {
-  const { id } = req.body;
-  if (!id) {
-    return res.status(400).json({
-      error: "Missing id",
-    });
-  }
-  try {
-    await connectDB(`DELETE FROM year WHERE id = ? `, [id]);
-    res.status(200).json({
-      status: "delete success",
-    });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({
-      error: err,
-      msg: "Sever Error",
-    });
-  }
-};
