@@ -8,13 +8,6 @@ const { readdirSync } = require("fs");
 
 const app = express();
 
-/*===============================*/
-const express = require("express");
-const router = express.Router();
-const { delYear } = require("./controllers/year");
-const { auth } = require("./middleware/auth");
-/*===============================*/
-
 //middleware
 
 app.use(morgan("dev"));
