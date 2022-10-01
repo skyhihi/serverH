@@ -20,7 +20,7 @@ router.get("/users", listUsers);
 
 router.post("/read-user", readUser);
 
-router.delete("/delete-user/:id", deleteUsers);
+router.delete("/delete-user/:id", auth, deleteUsers);
 
 router.post("/register", registerUsers);
 
@@ -29,6 +29,5 @@ router.put("/change-role", auth, changeRole);
 router.post("/login", login);
 
 router.post("/current-user", auth, currentUser);
-
 
 module.exports = router;

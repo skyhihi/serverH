@@ -84,7 +84,7 @@ exports.deleteUsers = async (req, res) => {
     });
   }
   try {
-    await connectDB(`DELETE FROM user WHERE id = ? `, [UserId]);
+    await connectDB(`DELETE FROM user WHERE id = ? `, [id]);
     res.status(200).json({
       status: "user has been delete",
     });
