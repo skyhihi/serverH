@@ -31,7 +31,7 @@ exports.registerUsers = async (req, res) => {
           name,
           username,
           hashedPassword,
-          "m",
+          "user",
         ]);
       });
 
