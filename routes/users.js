@@ -22,7 +22,7 @@ router.post("/read-user", readUser);
 
 router.delete("/delete-user/:id", auth, deleteUsers);
 
-router.post("/register", registerUsers);
+router.post("/register", auth, registerUsers);
 
 router.put("/change-role", auth, changeRole);
 
