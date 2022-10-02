@@ -16,9 +16,9 @@ const { auth } = require("../middleware/auth");
 
 const { registerUsers, login, currentUser } = require("../controllers/auth");
 
-router.get("/users", listUsers);
+router.get("/users", auth,listUsers);
 
-router.post("/read-user", readUser);
+router.post("/read-user",auth, readUser);
 
 router.delete("/delete-user/:id", auth, deleteUsers);
 
