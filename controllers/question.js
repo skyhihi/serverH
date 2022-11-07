@@ -4,7 +4,7 @@ const { connectDB } = require("../config/conDB");
 exports.listQuestions = async (req, res) => {
   try {
     const question = await connectDB(
-      "SELECT question.id,question.detail,question.type_id,  type.name FROM question INNER JOIN type ON question.type_id = type.type_id"
+      "SELECT question.id,question.detail,question.type_id,  type.name,type.type_sym FROM question INNER JOIN type ON question.type_id = type.type_id"
     );
     res.status(200).json(question);
   } catch (err) {

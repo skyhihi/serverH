@@ -3,7 +3,7 @@ const { connectDB } = require("../config/conDB");
 exports.details_type = async (req, res) => {
   try {
     const details_type = await connectDB(
-      "SELECT details_type.detail_id, details_type.title, details_type.details, details_type.type_id as details_t_id,type.type_id,type.name FROM details_type INNER JOIN type ON details_type.type_id=type.type_id;"
+      "SELECT details_type.detail_id, details_type.title, details_type.details, details_type.type_id as details_t_id,type.type_id,type.name,type.type_sym FROM details_type INNER JOIN type ON details_type.type_id=type.type_id;"
     );
     res.status(200).json(details_type);
   } catch (err) {
@@ -31,7 +31,7 @@ exports.details_typeID = async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).json({
-      error: err, 
+      error: err,
       msg: "Sever Error",
     });
   }
@@ -67,15 +67,15 @@ exports.createDetail_type = async (req, res) => {
     });
   }
   try {
-      await connectDB(`INSERT INTO details_type VALUES (?,?,?,?)`, [
-        null,
-        title,
-        details,
-        type_id,
-      ]);
-      res.status(200).json({
-        status: "create success",
-      });
+    await connectDB(`INSERT INTO details_type VALUES (?,?,?,?)`, [
+      null,
+      title,
+      details,
+      type_id,
+    ]);
+    res.status(200).json({
+      status: "create success",
+    });
   } catch (err) {
     console.log(err);
     res.status(500).json({
