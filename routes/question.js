@@ -9,6 +9,7 @@ const {
   editQuestion,
   editQuesType,
   deleteQuestion,
+  editQueStutus,
 } = require("../controllers/question");
 const { auth } = require("../middleware/auth");
 
@@ -21,6 +22,8 @@ router.post("/create-question", auth, create);
 router.put("/change-question", auth, editQuestion);
 
 router.put("/change-question-type", auth, editQuesType);
+
+router.put("/change-question-status", auth, editQueStutus);
 
 router.delete("/deleteQuestion/:id", auth, deleteQuestion);
 

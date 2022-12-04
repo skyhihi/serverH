@@ -4,7 +4,7 @@ const { connectDB } = require("../config/conDB");
 exports.listQuestions = async (req, res) => {
   try {
     const question = await connectDB(
-      "SELECT question.id,question.detail,question.type_id,  type.name,type.type_sym FROM question INNER JOIN type ON question.type_id = type.type_id"
+      "SELECT question.*,  type.name,type.type_sym FROM question INNER JOIN type ON question.type_id = type.type_id"
     );
     res.status(200).json(question);
   } catch (err) {
@@ -56,10 +56,11 @@ exports.create = async (req, res) => {
         error: "Question already exists",
       });
     } else {
-      const insert = await connectDB(`INSERT INTO question VALUES(?,?,?)`, [
+      const insert = await connectDB(`INSERT INTO question VALUES(?,?,?,?)`, [
         null,
         detail,
         type_id,
+        "unenable",
       ]);
 
       /*
@@ -133,6 +134,31 @@ exports.editQuesType = async (req, res) => {
   try {
     await connectDB(`UPDATE question SET type_id = ? WHERE id = ?`, [
       type_id,
+      id,
+    ]);
+    res.status(200).json({
+      status: "update success",
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      error: err,
+      msg: "Sever Error",
+    });
+  }
+};
+
+//Put change-question-status
+exports.editQueStutus = async (req, res) => {
+  const { id, status } = req.body;
+  if (!id || !status) {
+    return res.status(401).json({
+      error: "Missing id or status",
+    });
+  }
+  try {
+    await connectDB(`UPDATE question SET status = ? WHERE id = ?`, [
+      status,
       id,
     ]);
     res.status(200).json({
